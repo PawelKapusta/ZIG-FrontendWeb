@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
 import ErrorScreen from "./screens/ErrorScreen";
+import GameScreen from "./screens/GameScreen";
 import { ThemeProvider } from "@mui/styles";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
@@ -21,6 +22,7 @@ const App = () => {
         }}>
          <Routes>
            <Route exact path="/" element={<HomeScreen />} />
+           <Route exact path="/game" element={<GameScreen />} />
            <Route path="*" element={<ErrorScreen />} />
          </Routes>
        </Box>

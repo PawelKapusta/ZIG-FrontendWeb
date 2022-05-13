@@ -1,0 +1,23 @@
+.screen {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../assets/homeScreen.jpg');
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  height: 80px;
+  background: linear-gradient(to right, #0575e6, #021b79);
+  width: 200px;
+}
+
+#button {
+  color: #fff;
+}
+
+#button:hover {
+  background-color: white;
+}
