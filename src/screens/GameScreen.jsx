@@ -11,12 +11,12 @@ const GameScreen = () => {
   const nickname = localStorage.getItem("Nickname");
   const [open, setOpen] = useState(false);
   const [nick, setNick] = useState(nickname);
-
+  console.log(nickname)
   useEffect(() => {
-    if (nickname === null){
+    if (nickname === undefined || nickname === null || nickname === ''){
       handleDialogOpen();
     }
-  }, [])
+  })
 
   const handleDialogOpen = () => {
     setOpen(true);
@@ -30,12 +30,12 @@ const GameScreen = () => {
   return (
    <div className="App">
      <div>GameScreen</div>
-     <p>Nickname: {nick}</p>
+     <p>Nick: {nick}</p>
      <Dialog open={open} onClose={handleDialogClose}>
-       <DialogTitle>Set your nickname</DialogTitle>
+       <DialogTitle>Ustaw swój nick</DialogTitle>
        <DialogContent>
          <DialogContentText>
-          Please set your game nickname
+          Proszę ustaw swój nick
          </DialogContentText>
          <TextField
           autoFocus
@@ -49,8 +49,8 @@ const GameScreen = () => {
          />
        </DialogContent>
        <DialogActions>
-         <Button onClick={handleDialogClose}>Cancel</Button>
-         <Button onClick={handleDialogClose}>Save</Button>
+         <Button onClick={handleDialogClose}>Zaniechaj</Button>
+         <Button onClick={handleDialogClose}>Zapisz</Button>
        </DialogActions>
      </Dialog>
    </div>
