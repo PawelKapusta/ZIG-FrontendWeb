@@ -9,13 +9,15 @@ import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { OldWorldContextProvider } from "./store/oldWorldContext";
 import NickNavigator from "./screens/NickNavigator";
 import MainGameScreen from "./screens/MainGameScreen";
+import { LoginContextProvider } from "./store/loginContext";
 
 const App = () => {
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
     return (
         <BrowserRouter>
-            <OldWorldContextProvider>
+            <LoginContextProvider>
+     <OldWorldContextProvider>
      <ThemeProvider theme={theme}>
                 <Box
                     sx={{
@@ -32,7 +34,8 @@ const App = () => {
                 </Box>
             </ThemeProvider>
      </OldWorldContextProvider>
-        </BrowserRouter>
+     </LoginContextProvider>
+   </BrowserRouter>
     );
 };
 
