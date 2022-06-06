@@ -27,7 +27,7 @@ const NickNavigator = () => {
 
     const handleDialogSave = () => {
         localStorage.setItem("Nickname", nick);
-        setOpen(atufalse);
+        setOpen(false);
         navigate("/main-game");
     };
     const handleDialogClose = () => {
