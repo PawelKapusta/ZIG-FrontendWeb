@@ -31,13 +31,14 @@ const NickNavigator = () => {
         navigate("/main-game");
     };
     const handleDialogClose = () => {
-        setOpen(false);
+        navigate("/");
+
     };
 
     return (
         <div className="App">
             <div>GameScreen</div>
-            <p>Nick: {nick}</p>
+            <p>Nick: {nickname}</p>
             <Dialog open={open} onClose={handleDialogSave}>
                 <DialogTitle>Ustaw swój nick</DialogTitle>
                 <DialogContent>
