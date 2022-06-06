@@ -27,17 +27,18 @@ const NickNavigator = () => {
 
     const handleDialogSave = () => {
         localStorage.setItem("Nickname", nick);
-        setOpen(false);
+        setOpen(atufalse);
         navigate("/main-game");
     };
     const handleDialogClose = () => {
-        setOpen(false);
+        navigate("/");
+
     };
 
     return (
         <div className="App">
             <div>GameScreen</div>
-            <p>Nick: {nick}</p>
+            <p>Nick: {nickname}</p>
             <Dialog open={open} onClose={handleDialogSave}>
                 <DialogTitle>Ustaw swój nick</DialogTitle>
                 <DialogContent>
