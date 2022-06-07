@@ -4,17 +4,21 @@ import {Box} from "@mui/material";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
 import ErrorScreen from "./screens/ErrorScreen";
+import { ThemeProvider } from "@mui/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { OldWorldContextProvider } from "./store/oldWorldContext";
 import NickNavigator from "./screens/NickNavigator";
-import {ThemeProvider} from "@mui/styles";
-import {createTheme, responsiveFontSizes} from "@mui/material/styles";
 import MainGameScreen from "./screens/MainGameScreen";
+import { LoginContextProvider } from "./store/loginContext";
 
 const App = () => {
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
     return (
         <BrowserRouter>
-            <ThemeProvider theme={theme}>
+            <LoginContextProvider>
+     <OldWorldContextProvider>
+     <ThemeProvider theme={theme}>
                 <Box
                     sx={{
                         display: "flex",
@@ -29,7 +33,9 @@ const App = () => {
                     </Routes>
                 </Box>
             </ThemeProvider>
-        </BrowserRouter>
+     </OldWorldContextProvider>
+     </LoginContextProvider>
+   </BrowserRouter>
     );
 };
 

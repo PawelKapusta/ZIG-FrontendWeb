@@ -17,8 +17,32 @@
 
 #button {
   color: #fff;
+  cursor: pointer;
 }
 
 #button:hover {
   background-color: white;
+}
+.reader {
+  display: block;
+  height: 80px;
+  width: 200px;
+  background: linear-gradient(to right, #0575e6, #021b79);
+  margin-left: 3%;
+
+}
+
+.headerFile {
+  color: white;
+  font-size: 19px;
+}
+
+.fileReader {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 200px;
+  color: white;
 }
