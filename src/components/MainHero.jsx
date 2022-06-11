@@ -5,7 +5,7 @@ import styles from "../styles/MainGameScreen.module.css";
 const MainHero = () => {
   return (
     <div className={styles.MainHero}>
-      <img id="MainHero" src={mainHeroImage} />
+      <img id="MainHero" src={mainHeroImage} alt="MainHero" />
     </div>
   );
 };

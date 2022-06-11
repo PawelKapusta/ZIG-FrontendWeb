@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../styles/MainGameScreen.module.css";
 import Equipment from "../components/Equipment";
 import HP from "../components/HP";
@@ -15,6 +15,11 @@ const modalInfo = "                    Jesteś głównym bohaterem gry. Twoim ce
     "                    pilnowanego przez groźnego smoka. Smoka możesz zabić w walce (pod warunkiem, że uzyskasz odpowiednio dużo siły),\n" +
     "                    otruć lub wypłoszyć z legowiska. Siłę zwiększamy jedząc obiekty o dużej wartości odżywczej, truciznę dostaniemy\n" +
     "                    od przyjaciół lub pozyskamy z trujących roślin."
+import { GameContext } from "../store/gameContexts";
+
+const MainGameScreen = () => {
+  const nickname = localStorage.getItem("Nickname");
+  let { hp, coins } = useContext(GameContext);
 
 const MainGameScreen = () => {
     const nickname = localStorage.getItem("Nickname");
@@ -30,9 +35,12 @@ const MainGameScreen = () => {
 
     return (
         <div className={styles.screen}>
-            <HP buttonStyle={buttonStyle} healthPoints={100}/>
 
-            <Coins buttonStyle={buttonStyle} money={10}/>
+  return (
+    <div className={styles.screen}>
+      <HP buttonStyle={buttonStyle} healthPoints={hp} />
+
+      <Coins buttonStyle={buttonStyle} money={coins} />
 
             <Equipment buttonStyle={buttonStyle}/>
 
