@@ -1,90 +1,96 @@
 .screen {
-  height: 100vh;
-  width: 100vw;
-  background: url("../assets/landscape.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    background: url("../assets/landscape.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .messageHP {
-  color: #52020c;
-  left: 15px;
-  top: 80px;
+    color: #52020c;
+    left: 15px;
+    top: 80px;
 }
 
 .messageCoin {
-  color: #594116;
-  left: 85px;
-  top: 95px;
+    color: #594116;
+    left: 85px;
+    top: 95px;
 }
 
 .buttonLogoHeart {
-  color: crimson;
+    color: crimson;
 }
 
 .buttonHeart {
-  padding: 18px 25px;
-  left: 10px;
-  top: 10px;
+    padding: 18px 25px;
+    left: 10px;
+    top: 10px;
 }
 
 .buttonLogoCoin {
-  color: #dca314;
+    color: #dca314;
 }
 
 .buttonCoin {
-  left: 125px;
-  top: 10px;
+    left: 125px;
+    top: 10px;
 }
 
 .buttonLogoEquipment {
-  color: #4f372d;
+    color: #4f372d;
 }
 
 .buttonEquipment {
-  left: 230px;
-  top: 10px;
+    left: 230px;
+    top: 10px;
 }
 
 .chipMainHero {
-  right: 140px;
-  top: 10px;
+    right: 140px;
+    top: 10px;
 }
 
 .buttonLogoTeleport {
-  color: #883fc4;
+    color: #883fc4;
 }
 
 .buttonTeleport {
-  left: 10px;
-  bottom: 10px;
+    left: 10px;
+    bottom: 10px;
+}
+
+.buttonStartInfo {
+    position: absolute;
+    left: 390px;
+    bottom: 80px;
 }
 
 .buttonLogoTravel {
-  color: #46b969;
+    color: #46b969;
 }
 
 .buttonTravel {
-  position: absolute;
-  left: 160px;
-  bottom: 10px;
+    position: absolute;
+    left: 160px;
+    bottom: 10px;
 }
 
 .buttonMenu {
-  position: absolute;
-  right: 10px;
-  top: 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 img {
-  position: absolute;
-  width: 40vw;
-  height: 70vh;
-  object-fit: cover;
-  object-position: top;
-  vertical-align: bottom;
-  right: 1vw;
-  bottom: 0px;
+    position: absolute;
+    width: 40vw;
+    height: 70vh;
+    object-fit: cover;
+    object-position: top;
+    vertical-align: bottom;
+    right: 1vw;
+    bottom: 0px;
 }
