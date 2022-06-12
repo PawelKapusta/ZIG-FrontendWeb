@@ -26,7 +26,7 @@ export const GameContextProvider = ({ children }) => {
     items,
     setItems,
     exchange,
-    setExchange
+    setExchange,
   };
 
   return <GameContext.Provider value={providerValue}>{children}</GameContext.Provider>;

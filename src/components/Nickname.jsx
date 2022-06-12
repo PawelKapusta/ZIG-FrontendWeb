@@ -17,7 +17,8 @@ const Nickname = props => {
           textTransform: "none",
           position: "absolute",
           marginTop: "16px",
-        }}></Chip>
+        }}
+      ></Chip>
     </div>
   );
 };

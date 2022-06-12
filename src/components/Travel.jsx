@@ -91,7 +91,8 @@ const Travel = props => {
         className={styles.buttonTravel}
         style={buttonStyle}
         startIcon={<SnowshoeingRoundedIcon className={styles.buttonLogoTravel} />}
-        onClick={handleClickOpen}>
+        onClick={handleClickOpen}
+      >
         Travel
       </Button>
 
@@ -105,7 +106,8 @@ const Travel = props => {
                   key={location.id}
                   variant="contained"
                   style={{ margin: "5px" }}
-                  onClick={() => onLocationChange(location)}>
+                  onClick={() => onLocationChange(location)}
+                >
                   {location.name}
                 </Button>
               );
