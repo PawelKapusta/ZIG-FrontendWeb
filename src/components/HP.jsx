@@ -3,11 +3,8 @@ import styles from "../styles/MainGameScreen.module.css";
 import { Button } from "@mui/material";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 
-const HP = props => {
-  const buttonStyle = props.buttonStyle;
-
+const HP = ({ buttonStyle, healthPoints, isShowed }) => {
   const [hp, setHp] = useState(false);
-  const HpAmount = props.healthPoints;
   const onHpClick = () => {
     if (hp === true) {
       setHp(false);
@@ -18,23 +15,25 @@ const HP = props => {
   };
 
   return (
-    <div>
+    <div className={styles.attributesBox}>
       <Button
         className={styles.buttonHeart}
         style={buttonStyle}
         startIcon={<FavoriteRoundedIcon className={styles.buttonLogoHeart} />}
-        onClick={onHpClick}>
-        {HpAmount}
+        onClick={onHpClick}
+      >
+        {healthPoints}
       </Button>
 
-      {hp && (
+      {hp && !isShowed && (
         <div
           className={styles.messageHP}
           style={{
             textTransform: "none",
             position: "absolute",
-          }}>
-          You have {HpAmount} HP
+          }}
+        >
+          You have {healthPoints} HP
         </div>
       )}
     </div>

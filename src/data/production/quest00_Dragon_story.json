@@ -1,5 +1,5 @@
 [
-    {
+  {
     "Title": "Drunkard gets thrown out of Inn / Wyrzucenie awanturnika z karczmy",
     "TitleGeneric": "Fight ending with character’s escape / Walka zakończona ucieczką uczestnika",
     "Description": "W karczmie awanturuje się pijak. Wzbudza to irytację bohatera, który po ojcowsku daje mu w ucho i zaskoczony pijak wybiega na zewnątrz. Karczmarz wzdycha z ulgą i obdarza bohatera wdzięcznym spojrzeniem.",
@@ -21,7 +21,6 @@
                   "Name": "Poison",
                   "Attributes": {}
                 }
-
               ]
             },
             {
@@ -41,7 +40,6 @@
         },
         {
           "Name": "Road"
-          
         }
       ]
     },

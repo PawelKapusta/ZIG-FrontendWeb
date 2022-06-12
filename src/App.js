@@ -26,7 +26,8 @@ const App = () => {
                   display: "flex",
                   flexDirection: "column",
                   minHeight: "100vh",
-                }}>
+                }}
+              >
                 <Routes>
                   <Route exact path="/" element={<HomeScreen />} />
                   <Route exact path="/nick" element={<NickNavigator />} />

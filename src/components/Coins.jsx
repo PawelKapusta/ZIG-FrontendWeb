@@ -3,11 +3,8 @@ import styles from "../styles/MainGameScreen.module.css";
 import { Button } from "@mui/material";
 import PaidRoundedIcon from "@mui/icons-material/PaidRounded";
 
-const Coins = props => {
-  const buttonStyle = props.buttonStyle;
-
+const Coins = ({ buttonStyle, money, isShowed }) => {
   const [coin, setCoin] = useState(false);
-  const coinAmount = props.money;
   const onCoinClick = () => {
     if (coin === true) {
       setCoin(false);
@@ -18,22 +15,24 @@ const Coins = props => {
   };
 
   return (
-    <div>
+    <div className={styles.attributesBox}>
       <Button
         className={styles.buttonCoin}
         style={buttonStyle}
         startIcon={<PaidRoundedIcon className={styles.buttonLogoCoin} />}
-        onClick={onCoinClick}>
-        {coinAmount}
+        onClick={onCoinClick}
+      >
+        {money}
       </Button>
-      {coin && (
+      {coin && !isShowed && (
         <div
           className={styles.messageCoin}
           style={{
             textTransform: "none",
             position: "absolute",
-          }}>
-          You have {coinAmount} Coins
+          }}
+        >
+          You have {money} Coins
         </div>
       )}
     </div>

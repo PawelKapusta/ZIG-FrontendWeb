@@ -9,8 +9,12 @@ import Nickname from "../components/Nickname";
 import Menu from "../components/Menu";
 import MainHero from "../components/MainHero";
 import VerticalCenteredModal from "../components/Modal";
+
 import {GameContext} from "../store/gameContexts";
 import ModalPickup from "../components/Pickup";
+import { GameContext } from "../store/gameContexts";
+import NPCHero from "../components/NpcHero";
+
 
 const modalHeader = "Instrukcja gry 'Dragon Story'";
 const modalInfo =
@@ -21,7 +25,8 @@ const modalInfo =
 
 const MainGameScreen = () => {
     const nickname = localStorage.getItem("Nickname");
-    let {hp, coins, backgroundImage} = useContext(GameContext);
+  let { hp, coins, backgroundImage, currentLocation } = useContext(GameContext);
+
 
     const buttonStyle = {
         borderRadius: 10,
@@ -31,6 +36,7 @@ const MainGameScreen = () => {
         textTransform: "none",
         position: "absolute",
     };
+
 
     return (
         <div
@@ -54,6 +60,7 @@ const MainGameScreen = () => {
 
             <Nickname nickname={nickname}/>
 
+
             <Menu buttonStyle={buttonStyle}/>
             <VerticalCenteredModal
                 buttonName="Start here"
@@ -63,8 +70,19 @@ const MainGameScreen = () => {
 
             <ModalPickup buttonStyle={buttonStyle}/>
             <MainHero/>
-        </div>
-    );
+
+      {currentLocation?.Characters?.length !== 0 &&
+      currentLocation?.Characters && currentLocation?.Characters[0]?.Name !== "Main_hero" ? (
+        <NPCHero
+          items={currentLocation?.Characters ? currentLocation?.Characters[0]?.Items : [] }
+          name={currentLocation?.Characters ? currentLocation?.Characters[0]?.Name : []}
+          attributes={currentLocation?.Characters ? currentLocation?.Characters[0]?.Attributes : []}
+        />
+      ) : (
+        ""
+      )}
+    </div>
+  );
 };
 
 export default MainGameScreen;

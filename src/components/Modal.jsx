@@ -1,4 +1,4 @@
-import {Button, Modal} from 'react-bootstrap';
+import { Button, Modal } from "react-bootstrap";
 import React from "react";
 import styles from "../styles/MainGameScreen.module.css";
 
@@ -28,28 +28,32 @@ function ModalFunc(props) {
     );
 };
 
+
 const VerticalCenteredModal = props => {
-    const modalInfo = props.modalInfo;
-    const modalHeader = props.modalHeader;
-    const buttonName = props.buttonName;
+  const modalInfo = props.modalInfo;
+  const modalHeader = props.modalHeader;
+  const buttonName = props.buttonName;
 
-    const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
 
-    return (
-        <>
-            <Button className={styles.buttonStartInfo} variant="primary" onClick={() => setModalShow(true)}>
-                {buttonName}
-            </Button>
+  return (
+    <>
+      <Button
+        className={styles.buttonStartInfo}
+        variant="primary"
+        onClick={() => setModalShow(true)}
+      >
+        {buttonName}
+      </Button>
 
-            <ModalFunc
-                show={modalShow}
-                modalInfo={modalInfo}
-                modalHeader={modalHeader}
-                onHide={() => setModalShow(false)}
-            />
-        </>
-    );
+      <ModalFunc
+        show={modalShow}
+        modalInfo={modalInfo}
+        modalHeader={modalHeader}
+        onHide={() => setModalShow(false)}
+      />
+    </>
+  );
 };
-
 
 export default VerticalCenteredModal;

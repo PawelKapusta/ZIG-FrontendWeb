@@ -1,82 +1,83 @@
 .screen {
-    height: 100vh;
-    width: 100vw;
+  height: 100vh;
+  width: 100vw;
 }
 
 .messageHP {
-    color: #52020c;
-    left: 15px;
-    top: 80px;
+  color: #52020c;
+  left: 15px;
+  top: 80px;
 }
 
 .messageCoin {
-    color: #594116;
-    left: 85px;
-    top: 95px;
+  color: #594116;
+  left: 85px;
+  top: 95px;
 }
 
 .buttonLogoHeart {
-    color: crimson;
+  color: crimson;
 }
 
 .buttonHeart {
-    padding: 18px 25px;
-    left: 10px;
-    top: 10px;
+  padding: 18px 25px;
+  left: 10px;
+  top: 10px;
 }
 
 .buttonLogoCoin {
-    color: #dca314;
+  color: #dca314;
 }
 
 .buttonCoin {
-    left: 125px;
-    top: 10px;
+  left: 125px;
+  top: 10px;
 }
 
 .buttonLogoEquipment {
-    color: #4f372d;
+  color: #4f372d;
 }
 
 .buttonEquipment {
-    left: 230px;
-    top: 10px;
+  left: 230px;
+  top: 10px;
 }
 
 .chipMainHero {
-    right: 140px;
-    top: 10px;
+  right: 140px;
+  top: 10px;
 }
 
 .buttonLogoTeleport {
-    color: #883fc4;
+  color: #883fc4;
 }
 
 .buttonTeleport {
-    left: 10px;
-    bottom: 10px;
+  left: 10px;
+  bottom: 10px;
 }
 
 .buttonStartInfo {
+
     position: absolute;
     left: 350px;
     bottom: 25px;
 }
 
 .buttonLogoTravel {
-    color: #46b969;
+  color: #46b969;
 }
 
 .buttonTravel {
-    position: absolute;
-    left: 160px;
-    bottom: 10px;
+  position: absolute;
+  left: 160px;
+  bottom: 10px;
 }
 
 .buttonMenu {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
 .buttonAvailableItems {
@@ -87,12 +88,64 @@
 }
 
 img {
-    position: absolute;
-    width: 40vw;
-    height: 70vh;
-    object-fit: cover;
-    object-position: top;
-    vertical-align: bottom;
-    right: 1vw;
-    bottom: 0px;
+  position: absolute;
+  width: 40vw;
+  height: 70vh;
+  object-fit: cover;
+  object-position: top;
+  vertical-align: bottom;
+  right: 1vw;
+  bottom: 0px;
+}
+
+.attributesBox {
+  max-width: 40px;
+}
+
+.npcHero {
+  position: absolute;
+  bottom: 200px;
+  left: 150px;
+  width: 300px;
+  height: auto;
+  cursor: pointer;
+  border: 3px solid green;
+}
+
+#NpcHero {
+  position: relative;
+  max-width: 100%;
+  height: auto;
+}
+
+.npcAttributes {
+  display: inline-flex;
+  margin-bottom: 3%;
+}
+
+#npcHeroButtons {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+#npcButton {
+  background-color: #00a5e0;
+  border: 1px solid #00a5e0;
+  color: white;
+  margin-bottom: 1%;
+}
+
+#npcButton:hover {
+  color: black;
+  border: 1px solid #00a5e0;
+  background-color: white;
+}
+
+#npcHeroButtonClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1%;
 }

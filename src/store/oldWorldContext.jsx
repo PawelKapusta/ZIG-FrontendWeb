@@ -6,26 +6,24 @@ export const OldWorldContextProvider = ({ children }) => {
   const [oldWorld, setOldWorld] = useState([]);
   const [errorOldWorld, setErrorOldWorld] = useState();
 
-  const readFileOnUpload = (uploadedFile) =>{
+  const readFileOnUpload = uploadedFile => {
     const fileReader = new FileReader();
-    fileReader.onloadend = ()=>{
-      try{
+    fileReader.onloadend = () => {
+      try {
         setOldWorld(fileReader.result);
-        setErrorOldWorld(null)
-      }catch(e){
+        setErrorOldWorld(null);
+      } catch (e) {
         setErrorOldWorld("**Not valid JSON file!**");
       }
-    }
-    if( uploadedFile!== undefined)
-      fileReader.readAsText(uploadedFile);
-  }
-
+    };
+    if (uploadedFile !== undefined) fileReader.readAsText(uploadedFile);
+  };
 
   const providerValue = {
     oldWorld,
     setOldWorld,
     errorOldWorld,
-    readFileOnUpload
+    readFileOnUpload,
   };
 
   return <OldWorldContext.Provider value={providerValue}>{children}</OldWorldContext.Provider>;
