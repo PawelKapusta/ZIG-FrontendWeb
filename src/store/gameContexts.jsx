@@ -5,7 +5,7 @@ export const GameContextProvider = ({ children }) => {
   const [hp, setHp] = useState(100);
   const [coins, setCoins] = useState(10);
   const [locations, setLocations] = useState(dragonStoryLocations);
-  const [currentLocations, setCurrentLocations] = useState(locations[0]);
+  const [currentLocation, setCurrentLocation] = useState(dragonStoryLocations[0]);
 
   const providerValue = {
     hp,
@@ -14,8 +14,8 @@ export const GameContextProvider = ({ children }) => {
     setCoins,
     locations,
     setLocations,
-    currentLocations,
-    setCurrentLocations,
+    currentLocation,
+    setCurrentLocation,
   };
 
   return <GameContext.Provider value={providerValue}>{children}</GameContext.Provider>;
@@ -23,7 +23,7 @@ export const GameContextProvider = ({ children }) => {
 
 const dragonStoryLocations = [
   {
-    Id: "140686910713664",
+    Id: "0",
     Name: "Road",
     Characters: [
       {
@@ -44,24 +44,24 @@ const dragonStoryLocations = [
     ],
     Connections: [
       {
-        Destination: "140686910711488",
+        Destination: "1",
       },
       {
-        Destination: "140686910678976",
+        Destination: "2",
       },
       {
-        Destination: "140686910277632",
+        Destination: "3",
       },
       {
-        Destination: "140686911964288",
+        Destination: "4",
       },
       {
-        Destination: "140686910710080",
+        Destination: "5",
       },
     ],
   },
   {
-    Id: "140686910710080",
+    Id: "5",
     Name: "Wizards_hut",
     Attributes: {
       IsPrivate: true,
@@ -87,12 +87,12 @@ const dragonStoryLocations = [
     ],
     Connections: [
       {
-        Destination: "140686910713664",
+        Destination: "0",
       },
     ],
   },
   {
-    Id: "140686910655872",
+    Id: "6",
     Name: "Dragons_lair",
     Characters: [
       {
@@ -112,12 +112,12 @@ const dragonStoryLocations = [
     ],
     Connections: [
       {
-        Destination: "140686910711488",
+        Destination: "1",
       },
     ],
   },
   {
-    Id: "140686910711488",
+    Id: "1",
     Name: "Forest",
     Items: [
       {
@@ -130,15 +130,15 @@ const dragonStoryLocations = [
     ],
     Connections: [
       {
-        Destination: "140686910713664",
+        Destination: "0",
       },
       {
-        Destination: "140686910655872",
+        Destination: "6",
       },
     ],
   },
   {
-    Id: "140686910277632",
+    Id: "3",
     Name: "Pasture",
     Characters: [
       {
@@ -151,15 +151,15 @@ const dragonStoryLocations = [
     ],
     Connections: [
       {
-        Destination: "140686910713664",
+        Destination: "0",
       },
       {
-        Destination: "140686911964288",
+        Destination: "4",
       },
     ],
   },
   {
-    Id: "140686911964288",
+    Id: "4",
     Name: "Village",
     Items: [
       {
@@ -168,15 +168,15 @@ const dragonStoryLocations = [
     ],
     Connections: [
       {
-        Destination: "140686910713664",
+        Destination: "0",
       },
       {
-        Destination: "140686910277632",
+        Destination: "3",
       },
     ],
   },
   {
-    Id: "140686910678976",
+    Id: "2",
     Name: "Inn",
     Characters: [
       {
@@ -214,19 +214,20 @@ const dragonStoryLocations = [
     ],
     Connections: [
       {
-        Destination: "140686910713664",
+        Destination: "7",
       },
       {
-        Destination: "140686910277632",
+        Destination: "3",
       },
     ],
   },
   {
+    Id: "7",
     Name: "Prison",
     Characters: [],
     Connections: [
       {
-        Destination: "Road",
+        Destination: "0",
       },
     ],
   },
