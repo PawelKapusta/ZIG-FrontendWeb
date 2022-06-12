@@ -89,7 +89,8 @@ const Teleport = props => {
         className={styles.buttonTeleport}
         style={buttonStyle}
         startIcon={<MeetingRoomRoundedIcon className={styles.buttonLogoTeleport} />}
-        onClick={handleClickOpen}>
+        onClick={handleClickOpen}
+      >
         Teleport
       </Button>
 
@@ -103,7 +104,8 @@ const Teleport = props => {
                   key={location.id}
                   variant="contained"
                   style={{ margin: "5px" }}
-                  onClick={() => onLocationChange(location)}>
+                  onClick={() => onLocationChange(location)}
+                >
                   {location.name}
                 </Button>
               );
