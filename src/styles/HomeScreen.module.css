@@ -1,7 +1,7 @@
 .screen {
   height: 100vh;
   width: 100vw;
-  background-image: url('../assets/homeScreen.jpg');
+  background-image: url("../assets/homeScreen.jpg");
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
@@ -29,7 +29,6 @@
   width: 200px;
   background: linear-gradient(to right, #0575e6, #021b79);
   margin-left: 3%;
-
 }
 
 .headerFile {

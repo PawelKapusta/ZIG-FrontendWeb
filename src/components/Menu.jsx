@@ -15,7 +15,8 @@ const Menu = props => {
         className={styles.buttonMenu}
         style={buttonStyle}
         startIcon={<MenuIcon className={styles.buttonLogoMenu} />}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         Menu
       </Button>
     </div>

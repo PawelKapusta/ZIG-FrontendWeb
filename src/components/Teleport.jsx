@@ -15,7 +15,8 @@ const Teleport = props => {
         className={styles.buttonTeleport}
         style={buttonStyle}
         startIcon={<MeetingRoomRoundedIcon className={styles.buttonLogoTeleport} />}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         Teleport
       </Button>
     </div>
