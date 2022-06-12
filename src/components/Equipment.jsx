@@ -91,6 +91,7 @@ const Equipment = props => {
                                 </Paper>
                                 <Paper>Value: {item.Attributes.Value}</Paper>
                                 <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
+                                <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
                                 <Button onClick={(e) => {
                                     toUse(e, item.Name)
                                 }}> Use</Button>

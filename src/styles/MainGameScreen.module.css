@@ -58,9 +58,10 @@
 }
 
 .buttonStartInfo {
-  position: absolute;
-  left: 390px;
-  bottom: 80px;
+
+    position: absolute;
+    left: 350px;
+    bottom: 25px;
 }
 
 .buttonLogoTravel {
@@ -77,6 +78,13 @@
   position: absolute;
   right: 10px;
   top: 10px;
+}
+
+.buttonAvailableItems {
+    position: absolute;
+    bottom: 100px;
+    left: 420px;
+
 }
 
 img {
