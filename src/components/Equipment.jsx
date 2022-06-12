@@ -11,6 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {GameContext} from "../store/gameContexts";
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -28,12 +29,27 @@ const Equipment = props => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    let {items} = useContext(GameContext);
+    let {items, coins, setCoins, hp, setHp} = useContext(GameContext);
 
     function toUse(event, itemName) {
-        for(var i=0; i<items.length;i++){
-            if(items[i].Name === itemName){
-                items.splice(i,1);
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].Name === itemName) {
+                if (items[i].Attributes.NutritionalValue > 0) {
+                    setHp(hp + items[i].Attributes.NutritionalValue);
+                }
+                items.splice(i, 1);
+                break
+            }
+        }
+        handleClose();
+
+    }
+
+    function toSell(event, itemName) {
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].Name === itemName) {
+                setCoins(coins + items[i].Attributes.Value);
+                items.splice(i, 1);
                 break
             }
         }
@@ -47,7 +63,7 @@ const Equipment = props => {
             <Button
                 className={styles.buttonEquipment}
                 style={buttonStyle}
-                startIcon={<HomeRepairServiceRoundedIcon className={styles.buttonLogoEquipment} />}
+                startIcon={<HomeRepairServiceRoundedIcon className={styles.buttonLogoEquipment}/>}
                 onClick={handleOpen}>
                 Equipment
             </Button>
@@ -59,10 +75,10 @@ const Equipment = props => {
             >
 
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2" >
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
                         Equipment
                         <IconButton onClick={handleClose}>
-                            <CloseIcon />
+                            <CloseIcon/>
                         </IconButton>
                     </Typography>
                     <Grid container
@@ -70,10 +86,18 @@ const Equipment = props => {
                         {items.map(item => (
                             <Grid item key={item.Name} xs={4} sm={4} md={4} lg={4}>
                                 <Paper> {item.Name}
-                                    <img className={stylesEquipment.itemPhoto} src={require("../assets/items/" + item.Name + ".png" )} alt=""/>
+                                    <img className={stylesEquipment.itemPhoto}
+                                         src={require("../assets/items/" + item.Name + ".png")} alt=""/>
                                 </Paper>
                                 <Paper>Value: {item.Attributes.Value}</Paper>
-                                <Button onClick={(e) => {toUse(e,item.Name)}}> Use</Button>
+                                <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
+                                <Button onClick={(e) => {
+                                    toUse(e, item.Name)
+                                }}> Use</Button>
+                                <Button onClick={(e) => {
+                                    toSell(e, item.Name)
+                                }}> Sell</Button>
+
                             </Grid>
                         ))}
                     </Grid>
