@@ -11,7 +11,6 @@ const HP = ({ buttonStyle, healthPoints, isShowed }) => {
     } else {
       setHp(true);
     }
-    console.log(hp);
   };
 
   return (
