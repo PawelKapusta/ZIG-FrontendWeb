@@ -58,10 +58,9 @@
 }
 
 .buttonStartInfo {
-
-    position: absolute;
-    left: 350px;
-    bottom: 25px;
+  position: absolute;
+  left: 350px;
+  bottom: 25px;
 }
 
 .buttonLogoTravel {
@@ -81,10 +80,9 @@
 }
 
 .buttonAvailableItems {
-    position: absolute;
-    bottom: 100px;
-    left: 420px;
-
+  position: absolute;
+  bottom: 100px;
+  left: 420px;
 }
 
 img {
@@ -109,7 +107,6 @@ img {
   width: 300px;
   height: auto;
   cursor: pointer;
-  border: 3px solid green;
 }
 
 #NpcHero {
@@ -135,6 +132,18 @@ img {
   border: 1px solid #00a5e0;
   color: white;
   margin-bottom: 1%;
+}
+
+#npcHeroDeath {
+  position: relative;
+  left: 250px;
+  width: 150px;
+  height: auto;
+}
+
+#npcHeroDeathText {
+  margin-top: 2%;
+ text-align: center;
 }
 
 #npcButton:hover {

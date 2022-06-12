@@ -11,6 +11,8 @@ import Box from "@mui/material/Box";
 import Coins from "./Coins";
 import HP from "./HP";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
+import deathImage from '../assets/death.jpg';
 
 const imagesPath = {
   Wizard: wizardImage,
@@ -34,12 +36,19 @@ const style = {
   pb: 3,
 };
 
-const NPCHero = ({ name = '', items = [], attributes = [] }) => {
+const NPCHero = ({ name = "", items = [], attributes = [] }) => {
   const currentItems = useState(items);
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [deathOpen, setDeathOpen] = React.useState(false);
+  const { hp, setHp } = useContext(GameContext);
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleDeathClose = () => {
+    setDeathOpen(false);
   };
 
   const getImagePathByCharacterName = name => {
@@ -50,10 +59,25 @@ const NPCHero = ({ name = '', items = [], attributes = [] }) => {
     setOpen(true);
   };
 
-  const onFightClick = () => {};
+  const onFightClick = () => {
+    const hpAfterFight = hp - Math.round((2 / 3) * attributes?.HP);
+    if (hpAfterFight <= 0 ) {
+      setHp(0);
+      setDeathOpen(true);
+
+    } else {
+      setHp(hpAfterFight);
+      setOpen(false);
+    }
+  };
 
   const onExchangeClick = () => {};
-  console.log(items)
+
+  const onMoveToMenu = () => {
+    navigate("/");
+  }
+
+  console.log(items);
   return (
     <div>
       <div className={styles.npcHero} onClick={showOptions}>
@@ -80,15 +104,42 @@ const NPCHero = ({ name = '', items = [], attributes = [] }) => {
             <Button id={styles.npcButton} className={styles.npcButton} onClick={onFightClick}>
               Fight
             </Button>
-            {items?.length > 0 ? <Button id={styles.npcButton} className={styles.npcButton} onClick={onExchangeClick}>
-              Exchange
-            </Button> : ""}
+            {items?.length > 0 ? (
+              <Button id={styles.npcButton} className={styles.npcButton} onClick={onExchangeClick}>
+                Exchange
+              </Button>
+            ) : (
+              ""
+            )}
           </div>
           <Button
             onClick={handleClose}
             id={styles.npcHeroButtonClose}
             endIcon={<CloseIcon style={{ color: "black" }} />}
           />
+        </Box>
+      </Modal>
+      <Modal
+       hideBackdrop
+       open={deathOpen}
+       onClose={handleDeathClose}
+       aria-labelledby="child-modal-title"
+       aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style }}>
+            <h2 id="child-modal-title">Death</h2>
+            <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero" />
+          <h5 id={styles.npcHeroDeathText}> You lost to {name} :( </h5>
+          <Button
+           onClick={handleDeathClose}
+           id={styles.npcHeroButtonClose}
+           endIcon={<CloseIcon style={{ color: "black" }} />}
+          />
+          <div id={styles.npcHeroButtons}>
+            <Button id={styles.npcButton} className={styles.npcButton} onClick={onMoveToMenu}>
+              Go to Menu
+            </Button>
+          </div>
         </Box>
       </Modal>
     </div>
