@@ -11,6 +11,28 @@ export const GameContextProvider = ({ children }) => {
   const [backgroundImage, setBackgroundImage] = useState(imageUrl);
   const [items, setItems] = useState(dragonStoryLocations[0]["Characters"][0]["Items"]);
   const [exchange, setExchange] = useState(dragonStoryLocations[0]["Characters"]);
+  const [npcLives, setNpcLives] = useState({
+    Wizard: true,
+    Dragon: true,
+    Innkeeper: true,
+    Sheep: true,
+  });
+
+  const resetDataGame = () => {
+    setHp(100);
+    setCoins(10);
+    setLocations(dragonStoryLocations);
+    setCurrentLocation(dragonStoryLocations[0]);
+    setBackgroundImage(imageUrl);
+    setItems(dragonStoryLocations[0]["Characters"][0]["Items"]);
+    setExchange(dragonStoryLocations[0]["Characters"]);
+    setNpcLives({
+      Wizard: true,
+      Dragon: true,
+      Innkeeper: true,
+      Sheep: true,
+    });
+  };
 
   const providerValue = {
     hp,
@@ -27,6 +49,9 @@ export const GameContextProvider = ({ children }) => {
     setItems,
     exchange,
     setExchange,
+    resetDataGame,
+    npcLives,
+    setNpcLives,
   };
 
   return <GameContext.Provider value={providerValue}>{children}</GameContext.Provider>;
