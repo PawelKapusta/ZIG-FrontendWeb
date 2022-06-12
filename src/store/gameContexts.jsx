@@ -1,4 +1,6 @@
 import React, { useState, createContext } from "react";
+import imageUrl from "../assets/landscape.jpg";
+
 export const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
@@ -6,6 +8,7 @@ export const GameContextProvider = ({ children }) => {
   const [coins, setCoins] = useState(10);
   const [locations, setLocations] = useState(dragonStoryLocations);
   const [currentLocation, setCurrentLocation] = useState(dragonStoryLocations[0]);
+  const [backgroundImage, setBackgroundImage] = useState(imageUrl);
 
   const providerValue = {
     hp,
@@ -16,6 +19,8 @@ export const GameContextProvider = ({ children }) => {
     setLocations,
     currentLocation,
     setCurrentLocation,
+    backgroundImage,
+    setBackgroundImage,
   };
 
   return <GameContext.Provider value={providerValue}>{children}</GameContext.Provider>;
@@ -119,6 +124,7 @@ const dragonStoryLocations = [
   {
     Id: "1",
     Name: "Forest",
+    Characters: [],
     Items: [
       {
         Name: "Herbs",
@@ -161,6 +167,7 @@ const dragonStoryLocations = [
   {
     Id: "4",
     Name: "Village",
+    Characters: [],
     Items: [
       {
         Name: "Well",
