@@ -6,6 +6,8 @@ export const GameContextProvider = ({ children }) => {
   const [coins, setCoins] = useState(10);
   const [locations, setLocations] = useState(dragonStoryLocations);
   const [currentLocation, setCurrentLocation] = useState(dragonStoryLocations[0]);
+  const [items, setItems] = useState(dragonStoryLocations[0]["Characters"][0]["Items"]);
+  const [exchange, setExchange] = useState(dragonStoryLocations[0]["Characters"]);
 
   const providerValue = {
     hp,
@@ -16,6 +18,10 @@ export const GameContextProvider = ({ children }) => {
     setLocations,
     currentLocation,
     setCurrentLocation,
+    items,
+    setItems,
+    exchange,
+    setExchange
   };
 
   return <GameContext.Provider value={providerValue}>{children}</GameContext.Provider>;
@@ -33,6 +39,26 @@ const dragonStoryLocations = [
             Name: "Sword",
             Attributes: {
               Value: 1000,
+            },
+          },
+          {
+            Name: "Elixir",
+            Attributes: {
+              Value: 10,
+              NutritionalValue: 1000,
+            },
+          },
+          {
+            Name: "Dragon_egg",
+            Attributes: {
+              Value: 4000,
+            },
+          },
+          {
+            Name: "Elixir",
+            Attributes: {
+              Value: 10,
+              NutritionalValue: 1000,
             },
           },
         ],
