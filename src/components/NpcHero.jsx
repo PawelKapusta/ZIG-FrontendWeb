@@ -49,6 +49,8 @@ const NPCHero = ({name = "", NPCitems = [], attributes = []}) => {
         hp,
         setHp,
         items,
+        coins,
+        setCoins,
         currentLocation,
         exchanging,
         setExchanging,

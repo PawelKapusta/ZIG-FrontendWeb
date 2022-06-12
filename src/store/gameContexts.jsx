@@ -26,7 +26,8 @@ export const GameContextProvider = ({children}) => {
         setCurrentLocation(dragonStoryLocations[0]);
         setBackgroundImage(imageUrl);
         setItems(dragonStoryLocations[0]["Characters"][0]["Items"]);
-        setExchange(dragonStoryLocations[0]["Characters"]);
+        setExchanged(null);
+        setExchanging(null);
         setNpcLives({
             Wizard: true,
             Dragon: true,
