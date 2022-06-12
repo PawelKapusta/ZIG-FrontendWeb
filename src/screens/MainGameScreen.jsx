@@ -65,7 +65,6 @@ const MainGameScreen = () => {
 
             <ModalPickup buttonStyle={buttonStyle}/>
             <MainHero/>
-            {console.log("items", currentLocation?.Items)}
             {currentLocation?.Characters?.length !== 0 &&
             currentLocation?.Characters &&
             currentLocation?.Characters[0]?.Name !== "Main_hero" ? (

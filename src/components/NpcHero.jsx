@@ -53,9 +53,10 @@ const NPCHero = ({name = "", NPCitems = [], attributes = []}) => {
         exchanging,
         setExchanging,
         exchanged,
-        setExchanged
+        setExchanged,
+        resetDataGame,
+        npcLives, setNpcLives
     } = useContext(GameContext);
-    let myCharacterItems = currentLocation[0]
     const handleClose = () => {
         setOpen(false);
     };
@@ -80,12 +81,17 @@ const NPCHero = ({name = "", NPCitems = [], attributes = []}) => {
         if (hpAfterFight <= 0) {
             setHp(0);
             setDeathOpen(true);
-
         } else {
             setHp(hpAfterFight);
+            if (attributes?.Money) {
+                setCoins(coins + attributes?.Money);
+            }
+            setNpcLives({...npcLives, [name]: false});
             setOpen(false);
         }
     };
+
+    console.log("setNpcLives", npcLives[name]);
 
     const onExchangeClick = () => {
         setOpen(false);
@@ -94,8 +100,9 @@ const NPCHero = ({name = "", NPCitems = [], attributes = []}) => {
     };
 
     const onMoveToMenu = () => {
+        resetDataGame();
         navigate("/");
-    }
+    };
 
 
     function toYoursExchange(event, itemName) {
@@ -139,150 +146,235 @@ const NPCHero = ({name = "", NPCitems = [], attributes = []}) => {
 
     console.log(items);
     return (
-        <div>
-            <div className={styles.npcHero} onClick={showOptions}>
-                <img id={styles.NpcHero} src={getImagePathByCharacterName(name)} alt="NpcHero"/>
-            </div>
-            <Modal
-                hideBackdrop
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-            >
-                <Box sx={{...style}}>
-                    <h2 id="child-modal-title">{name}</h2>
-                    <div className={styles.npcAttributes}>
-                        <HP isShowed healthPoints={attributes["HP"]} buttonStyle={{height: 10}}/>
-                        {attributes["Money"] ? (
-                            <Coins isShowed money={attributes["Money"]} buttonStyle={{width: 10}}/>
-                        ) : (
-                            ""
-                        )}
+        <React.Fragment>
+            {npcLives[name] === true ? (
+                <div>
+                    <div className={styles.npcHero} onClick={showOptions}>
+                        <img id={styles.NpcHero} src={getImagePathByCharacterName(name)} alt="NpcHero"/>
                     </div>
-                    <div id={styles.npcHeroButtons}>
-                        <Button id={styles.npcButton} className={styles.npcButton} onClick={onFightClick}>
-                            Fight
-                        </Button>
-                        {items?.length > 0 ? (
-                            <Button id={styles.npcButton} className={styles.npcButton} onClick={onExchangeClick}>
-                                Exchange
-                            </Button>
-
-                        ) : (
-                            ""
-                        )}
-                    </div>
-                    <Button
-                        onClick={handleClose}
-                        id={styles.npcHeroButtonClose}
-                        endIcon={<CloseIcon style={{color: "black"}}/>}
-                    />
-                </Box>
-            </Modal>
-            <Modal
-                hideBackdrop
-                open={deathOpen}
-                onClose={handleDeathClose}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-            >
-                <Box sx={{...style}}>
-                    <h2 id="child-modal-title">Death</h2>
-                    <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero"/>
-                    <h5 id={styles.npcHeroDeathText}> You lost to {name} :( </h5>
-                    <Button
-                        onClick={handleDeathClose}
-                        id={styles.npcHeroButtonClose}
-                        endIcon={<CloseIcon style={{color: "black"}}/>}
-                    />
-                    <div id={styles.npcHeroButtons}>
-                        <Button id={styles.npcButton} className={styles.npcButton} onClick={onMoveToMenu}>
-                            Go to Menu
-                        </Button>
-                    </div>
-                </Box>
-            </Modal>
-
-            <Modal
-                hideBackdrop
-                open={exchangeOpen}
-                onClose={handleExchangeClose}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-            >
-                <Box sx={{...style}}>
-                    <h2 id="child-modal-title">Exchange</h2>
-                    <Button
-                        onClick={handleExchangeClose}
-                        id={styles.npcHeroButtonClose}
-                        endIcon={<CloseIcon style={{color: "black"}}/>}
-                    />
-                    <h2>Yours items</h2>
-                    <Grid container spacing={3}>
-                        {items.map(item => (
-                            <Grid item key={item.Name} xs={4} sm={4} md={4} lg={4}>
-                                <Paper>
-                                    {" "}
-                                    {item.Name}
-                                    <img
-                                        className={stylesEquipment.itemPhoto}
-                                        src={require("../assets/items/" + item.Name + ".png")}
-                                        alt=""
-                                    />
-                                </Paper>
-                                <Paper>Value: {item.Attributes.Value}</Paper>
-                                <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
-                                <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
-                                <Button
-                                    onClick={e => {
-                                        toYoursExchange(e, item.Name);
-                                    }}
-                                >
-                                    {" "}
-                                    Exchange
+                    <Modal
+                        hideBackdrop
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="child-modal-title"
+                        aria-describedby="child-modal-description"
+                    >
+                        <Box sx={{...style}}>
+                            <h2 id="child-modal-title">{name}</h2>
+                            <div className={styles.npcAttributes}>
+                                <HP isShowed healthPoints={attributes["HP"]} buttonStyle={{height: 10}}/>
+                                {attributes["Money"] ? (
+                                    <Coins isShowed money={attributes["Money"]} buttonStyle={{width: 10}}/>
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                            <div id={styles.npcHeroButtons}>
+                                <Button id={styles.npcButton} className={styles.npcButton} onClick={onFightClick}>
+                                    Fight
                                 </Button>
-                            </Grid>
-                        ))}
-                    </Grid>
+                                {items?.length > 0 ? (
+                                    <Button id={styles.npcButton} className={styles.npcButton}
+                                            onClick={onExchangeClick}>
+                                        Exchange
+                                    </Button>
 
-                    <h2>{name}'s items</h2>
-                    <Grid container spacing={3}>
-                        {NPCitems.map(item => (
-                            <Grid item key={item.Name} xs={4} sm={4} md={4} lg={4}>
-                                <Paper>
-                                    {" "}
-                                    {item.Name}
-                                    <img
-                                        className={stylesEquipment.itemPhoto}
-                                        src={require("../assets/items/" + item.Name + ".png")}
-                                        alt=""
-                                    />
-                                </Paper>
-                                <Paper>Value: {item.Attributes.Value}</Paper>
-                                <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
-                                <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
-                                <Button
-                                    onClick={e => {
-                                        toNPCExchange(e, item.Name);
-                                    }}
-                                >
-                                    {" "}
-                                    Exchange
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                            <Button
+                                onClick={handleClose}
+                                id={styles.npcHeroButtonClose}
+                                endIcon={<CloseIcon style={{color: "black"}}/>}
+                            />
+                        </Box>
+                    </Modal>
+                    <Modal
+                        hideBackdrop
+                        open={deathOpen}
+                        onClose={handleDeathClose}
+                        aria-labelledby="child-modal-title"
+                        aria-describedby="child-modal-description"
+                    >
+                        <Box sx={{...style}}>
+                            <h2 id="child-modal-title">Death</h2>
+                            <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero"/>
+                            <h5 id={styles.npcHeroDeathText}> You lost to {name} :( </h5>
+                            <Button
+                                onClick={handleDeathClose}
+                                id={styles.npcHeroButtonClose}
+                                endIcon={<CloseIcon style={{color: "black"}}/>}
+                            />
+                            <div id={styles.npcHeroButtons}>
+                                <Button id={styles.npcButton} className={styles.npcButton} onClick={onMoveToMenu}>
+                                    Go to Menu
                                 </Button>
+                            </div>
+                        </Box>
+                    </Modal>
+                    <Modal
+                        hideBackdrop
+                        open={exchangeOpen}
+                        onClose={handleExchangeClose}
+                        aria-labelledby="child-modal-title"
+                        aria-describedby="child-modal-description"
+                    >
+                        <Box sx={{...style}}>
+                            <h2 id="child-modal-title">Exchange</h2>
+                            <Button
+                                onClick={handleExchangeClose}
+                                id={styles.npcHeroButtonClose}
+                                endIcon={<CloseIcon style={{color: "black"}}/>}
+                            />
+                            <h2>Yours items</h2>
+                            <Grid container spacing={3}>
+                                {items.map(item => (
+                                    <Grid item key={item.Name} xs={4} sm={4} md={4} lg={4}>
+                                        <Paper>
+                                            {" "}
+                                            {item.Name}
+                                            <img
+                                                className={stylesEquipment.itemPhoto}
+                                                src={require("../assets/items/" + item.Name + ".png")}
+                                                alt=""
+                                            />
+                                        </Paper>
+                                        <Paper>Value: {item.Attributes.Value}</Paper>
+                                        <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
+                                        <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
+                                        <Button
+                                            onClick={e => {
+                                                toYoursExchange(e, item.Name);
+                                            }}
+                                        >
+                                            {" "}
+                                            Exchange
+                                        </Button>
+                                    </Grid>
+                                ))}
                             </Grid>
-                        ))}
-                    </Grid>
 
-                    <div id={styles.npcHeroButtons}>
+                            <h2>{name}'s items</h2>
+                            <Grid container spacing={3}>
+                                {NPCitems.map(item => (
+                                    <Grid item key={item.Name} xs={4} sm={4} md={4} lg={4}>
+                                        <Paper>
+                                            {" "}
+                                            {item.Name}
+                                            <img
+                                                className={stylesEquipment.itemPhoto}
+                                                src={require("../assets/items/" + item.Name + ".png")}
+                                                alt=""
+                                            />
+                                        </Paper>
+                                        <Paper>Value: {item.Attributes.Value}</Paper>
+                                        <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
+                                        <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
+                                        <Button
+                                            onClick={e => {
+                                                toNPCExchange(e, item.Name);
+                                            }}
+                                        >
+                                            {" "}
+                                            Exchange
+                                        </Button>
+                                    </Grid>
+                                ))}
+                            </Grid>
 
-                        <Button id={styles.npcButton} className={styles.npcButton} onClick={makeExchange}>
-                            Make Exchange
-                        </Button>
+                            <div id={styles.npcHeroButtons}>
+
+                                <Button id={styles.npcButton} className={styles.npcButton} onClick={makeExchange}>
+                                    Make Exchange
+                                </Button>
+                            </div>
+                        </Box>
+                    </Modal>
+
+                </div>
+
+            ) : (
+                ""
+            )}
+        </React.Fragment>
+    );
+    console.log(items);
+    return (
+        <React.Fragment>
+            {npcLives[name] === true ? (
+                <div>
+                    <div className={styles.npcHero} onClick={showOptions}>
+                        <img id={styles.NpcHero} src={getImagePathByCharacterName(name)} alt="NpcHero"/>
                     </div>
-                </Box>
-            </Modal>
-        </div>
+                    <Modal
+                        hideBackdrop
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="child-modal-title"
+                        aria-describedby="child-modal-description"
+                    >
+                        <Box sx={{...style}}>
+                            <h2 id="child-modal-title">{name}</h2>
+                            <div className={styles.npcAttributes}>
+                                <HP isShowed healthPoints={attributes["HP"]} buttonStyle={{height: 10}}/>
+                                {attributes["Money"] ? (
+                                    <Coins isShowed money={attributes["Money"]} buttonStyle={{width: 10}}/>
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                            <div id={styles.npcHeroButtons}>
+                                <Button id={styles.npcButton} className={styles.npcButton} onClick={onFightClick}>
+                                    Fight
+                                </Button>
+                                {items?.length > 0 ? (
+                                    <Button
+                                        id={styles.npcButton}
+                                        className={styles.npcButton}
+                                        onClick={onExchangeClick}
+                                    >
+                                        Exchange
+                                    </Button>
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                            <Button
+                                onClick={handleClose}
+                                id={styles.npcHeroButtonClose}
+                                endIcon={<CloseIcon style={{color: "black"}}/>}
+                            />
+                        </Box>
+                    </Modal>
+                    <Modal
+                        hideBackdrop
+                        open={deathOpen}
+                        onClose={handleDeathClose}
+                        aria-labelledby="child-modal-title"
+                        aria-describedby="child-modal-description"
+                    >
+                        <Box sx={{...style}}>
+                            <h2 id="child-modal-title">Death</h2>
+                            <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero"/>
+                            <h5 id={styles.npcHeroDeathText}> You lost to {name} :( </h5>
+                            <Button
+                                onClick={handleDeathClose}
+                                id={styles.npcHeroButtonClose}
+                                endIcon={<CloseIcon style={{color: "black"}}/>}
+                            />
+                            <div id={styles.npcHeroButtons}>
+                                <Button id={styles.npcButton} className={styles.npcButton} onClick={onMoveToMenu}>
+                                    Go to Menu
+                                </Button>
+                            </div>
+                        </Box>
+                    </Modal>
+                </div>
+            ) : (
+                ""
+            )}
+        </React.Fragment>
     );
 };
 

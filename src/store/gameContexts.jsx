@@ -12,6 +12,28 @@ export const GameContextProvider = ({children}) => {
     const [items, setItems] = useState(dragonStoryLocations[0]["Characters"][0]["Items"]);
     const [exchanging, setExchanging] = useState(null);
     const [exchanged, setExchanged] = useState(null);
+    const [npcLives, setNpcLives] = useState({
+        Wizard: true,
+        Dragon: true,
+        Innkeeper: true,
+        Sheep: true,
+    });
+
+    const resetDataGame = () => {
+        setHp(100);
+        setCoins(10);
+        setLocations(dragonStoryLocations);
+        setCurrentLocation(dragonStoryLocations[0]);
+        setBackgroundImage(imageUrl);
+        setItems(dragonStoryLocations[0]["Characters"][0]["Items"]);
+        setExchange(dragonStoryLocations[0]["Characters"]);
+        setNpcLives({
+            Wizard: true,
+            Dragon: true,
+            Innkeeper: true,
+            Sheep: true,
+        });
+    };
 
     const providerValue = {
         hp,
@@ -30,6 +52,9 @@ export const GameContextProvider = ({children}) => {
         setExchanging,
         exchanged,
         setExchanged,
+        resetDataGame,
+        npcLives,
+        setNpcLives,
     };
 
     return <GameContext.Provider value={providerValue}>{children}</GameContext.Provider>;
@@ -47,26 +72,6 @@ const dragonStoryLocations = [
                         Name: "Sword",
                         Attributes: {
                             Value: 1000,
-                        },
-                    },
-                    {
-                        Name: "Elixir",
-                        Attributes: {
-                            Value: 10,
-                            NutritionalValue: 1000,
-                        },
-                    },
-                    {
-                        Name: "Dragon_egg",
-                        Attributes: {
-                            Value: 4000,
-                        },
-                    },
-                    {
-                        Name: "Elixir",
-                        Attributes: {
-                            Value: 10,
-                            NutritionalValue: 1000,
                         },
                     },
                 ],
