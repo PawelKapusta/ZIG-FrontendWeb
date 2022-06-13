@@ -66,8 +66,8 @@ const ModalPickup = props => {
                   />
                 </Paper>
                 <Paper>Value: {item.Attributes.Value}</Paper>
-                <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
-                <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
+                <Paper>Nutritional: {item.Attributes.NutritionalValue.valueOf()}</Paper>
+                <Paper>IsPoison: {item.Attributes.IsPoison.toString()}</Paper>
                 <Button
                   onClick={e => {
                     toGet(e, item.Name);

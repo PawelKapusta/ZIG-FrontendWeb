@@ -246,8 +246,8 @@ const NPCHero = ({name = "", NPCitems = [], attributes = []}) => {
                                             />
                                         </Paper>
                                         <Paper>Value: {item.Attributes.Value}</Paper>
-                                        <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
-                                        <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
+                                        <Paper>Nutritional: {item.Attributes.NutritionalValue.valueOf()}</Paper>
+                                        <Paper>IsPoison: {item.Attributes.IsPoison.toString()}</Paper>
                                         <Button
                                             onClick={e => {
                                                 toYoursExchange(e, item.Name);
@@ -274,8 +274,8 @@ const NPCHero = ({name = "", NPCitems = [], attributes = []}) => {
                                             />
                                         </Paper>
                                         <Paper>Value: {item.Attributes.Value}</Paper>
-                                        <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
-                                        <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
+                                        <Paper>Nutritional: {item.Attributes.NutritionalValue.valueOf()}</Paper>
+                                        <Paper>IsPoison: {item.Attributes.IsPoison.toString()}</Paper>
                                         <Button
                                             onClick={e => {
                                                 toNPCExchange(e, item.Name);
