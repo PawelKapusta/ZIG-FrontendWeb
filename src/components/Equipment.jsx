@@ -11,6 +11,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { GameContext } from "../store/gameContexts";
+import deathImage from "../assets/death.jpg";
+import {useNavigate} from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -27,13 +29,27 @@ const style = {
 const Equipment = props => {
   const buttonStyle = props.buttonStyle;
   const [open, setOpen] = React.useState(false);
+  const [deathOpen, setDeathOpen] = React.useState(false);
+  const navigate = useNavigate();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  let { items, coins, setCoins, hp, setHp } = useContext(GameContext);
+  let { items, coins, setCoins, hp, setHp, resetDataGame} = useContext(GameContext);
+
+  const handleDeathClose = () => {
+    setDeathOpen(false);
+  };
+  const onMoveToMenu = () => {
+    resetDataGame();
+    navigate("/");
+  };
 
   function toUse(event, itemName) {
     for (var i = 0; i < items.length; i++) {
       if (items[i].Name === itemName) {
+        if(items[i].Attributes.IsPoison === true){
+          setHp(0);
+          setDeathOpen(true);
+        }
         if (items[i].Attributes.NutritionalValue > 0) {
           setHp(hp + items[i].Attributes.NutritionalValue);
         }
@@ -91,8 +107,8 @@ const Equipment = props => {
                   />
                 </Paper>
                 <Paper>Value: {item.Attributes.Value}</Paper>
-                <Paper>Nutritional: {item.Attributes.NutritionalValue}</Paper>
-                <Paper>IsPoison: {item.Attributes.IsPoison}</Paper>
+                <Paper>Nutrition: {item.Attributes.NutritionalValue.valueOf()}</Paper>
+                <Paper>IsPoison: {item.Attributes.IsPoison.toString()}</Paper>
                 <Button
                   onClick={e => {
                     toUse(e, item.Name);
@@ -112,6 +128,29 @@ const Equipment = props => {
               </Grid>
             ))}
           </Grid>
+        </Box>
+      </Modal>
+      <Modal
+          hideBackdrop
+          open={deathOpen}
+          onClose={handleDeathClose}
+          aria-labelledby="child-modal-title"
+          aria-describedby="child-modal-description"
+      >
+        <Box sx={{...style}}>
+          <h2 id="child-modal-title">Death</h2>
+          <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero"/>
+          <h5 id={styles.npcHeroDeathText}> You lost :( </h5>
+          <Button
+              onClick={handleDeathClose}
+              id={styles.npcHeroButtonClose}
+              endIcon={<CloseIcon style={{color: "black"}}/>}
+          />
+          <div id={styles.npcHeroButtons}>
+            <Button id={styles.npcButton} className={styles.npcButton} onClick={onMoveToMenu}>
+              Go to Menu
+            </Button>
+          </div>
         </Box>
       </Modal>
     </div>

@@ -128,20 +128,23 @@ const NPCHero = ({name = "", NPCitems = [], attributes = []}) => {
     }
 
     const makeExchange = () => {
-
-        for (var i = 0; i < items.length; i++) {
-            if (items[i].Name === exchanging.Name) {
-                items.splice(i, 1);
-                items.push(exchanged);
+        if (exchanged !== null && exchanging !== null) {
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].Name === exchanging.Name) {
+                    items.splice(i, 1);
+                    items.push(exchanged);
+                }
             }
-        }
-        for (var i = 0; i < NPCitems.length; i++) {
-            if (NPCitems[i].Name === exchanged.Name) {
-                NPCitems.splice(i, 1);
-                NPCitems.push(exchanging);
+            for (var i = 0; i < NPCitems.length; i++) {
+                if (NPCitems[i].Name === exchanged.Name) {
+                    NPCitems.splice(i, 1);
+                    NPCitems.push(exchanging);
+                }
             }
+            handleExchangeClose();
+        } else {
+            setExchangeOpen(true);
         }
-        handleExchangeClose();
 
 
     }
