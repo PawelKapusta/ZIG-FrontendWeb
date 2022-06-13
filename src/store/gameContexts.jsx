@@ -73,6 +73,8 @@ const dragonStoryLocations = [
                         Name: "Sword",
                         Attributes: {
                             Value: 1000,
+                            NutritionalValue: 0,
+                            IsPoison: true,
                         },
                     },
                 ],
@@ -123,6 +125,7 @@ const dragonStoryLocations = [
                 Attributes: {
                     Value: 10,
                     NutritionalValue: 1000,
+                    IsPoison: false,
                 },
             },
         ],
@@ -148,6 +151,8 @@ const dragonStoryLocations = [
                 Name: "Dragon_egg",
                 Attributes: {
                     Value: 4000,
+                    NutritionalValue: 0,
+                    IsPoison: false,
                 },
             },
         ],
@@ -166,6 +171,7 @@ const dragonStoryLocations = [
                 Name: "Herbs",
                 Attributes: {
                     Value: 30,
+                    NutritionalValue: 0,
                     IsPoison: true,
                 },
             },
@@ -188,6 +194,7 @@ const dragonStoryLocations = [
                 Attributes: {
                     HP: 10,
                     NutritionalValue: 20,
+                    IsPoison: false,
                 },
             },
         ],
@@ -209,6 +216,8 @@ const dragonStoryLocations = [
                 Name: "Well",
                 Attributes: {
                     Value: 10,
+                    NutritionalValue: 0,
+                    IsPoison: false,
                 },
             },
         ],
@@ -232,6 +241,7 @@ const dragonStoryLocations = [
                         Name: "Poison",
                         Attributes: {
                             Value: 1000,
+                            NutritionalValue: 0,
                             IsPoison: true,
                         },
                     },
@@ -248,6 +258,8 @@ const dragonStoryLocations = [
                         Name: "Alcohol",
                         Attributes: {
                             Value: 3,
+                            NutritionalValue: 0,
+                            IsPoison: false,
                         },
                     },
                 ],

@@ -134,6 +134,18 @@ img {
   margin-bottom: 1%;
 }
 
+.npcButtonExchange:target{
+  width: 120%;
+  height: 120%;
+  display: block;
+}
+
+#npcButtonExchange:target{
+  width: 120%;
+  height: 120%;
+  display: block;
+}
+
 #npcHeroDeath {
   position: relative;
   left: 250px;
