@@ -74,7 +74,7 @@ const dragonStoryLocations = [
                         Attributes: {
                             Value: 1000,
                             NutritionalValue: 0,
-                            IsPoison: true,
+                            IsPoison: false,
                         },
                     },
                 ],
