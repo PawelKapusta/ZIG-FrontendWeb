@@ -7,72 +7,22 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Wizards_hut from "../assets/Wizards_hut.jpg";
-import Road from "../assets/landscape.jpg";
-import Dragons_lair from "../assets/Dragons_lair.jpg";
-import Forest from "../assets/Forest.jpg";
-import Pasture from "../assets/Pasture.jpg";
-import Village from "../assets/Village.jpg";
-import Inn from "../assets/Inn.jpg";
-import Prison from "../assets/Prison.jpg";
+import { getNewStateGame } from "../api/client";
 
 const Travel = props => {
   const buttonStyle = props.buttonStyle;
-
-  let { currentLocation, setCurrentLocation, locations, setBackgroundImage } =
-    useContext(GameContext);
-
-  const availableTravelIds = currentLocation.Connections.map(loc => {
-    return loc.Destination;
-  });
-  const allLocations = locations.map(location => {
-    return { id: location.Id, name: location.Name };
-  });
-
-  const availableTravels = allLocations.filter(location => {
-    return availableTravelIds.includes(location.id);
-  });
-
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  let { travelProduction, game, setGame } = useContext(GameContext);
 
   async function onLocationChange(choosenLocation) {
     setOpen(false);
-    await sleep(200);
-    const newLocation = locations.filter(location => {
-      return location.Id === choosenLocation.id;
-    });
-    setCurrentLocation(newLocation[0]);
-
-    switch (newLocation[0].Name) {
-      case "Road":
-        setBackgroundImage(Road);
-        break;
-      case "Wizards_hut":
-        setBackgroundImage(Wizards_hut);
-        break;
-      case "Dragons_lair":
-        setBackgroundImage(Dragons_lair);
-        break;
-      case "Forest":
-        setBackgroundImage(Forest);
-        break;
-      case "Pasture":
-        setBackgroundImage(Pasture);
-        break;
-      case "Village":
-        setBackgroundImage(Village);
-        break;
-      case "Inn":
-        setBackgroundImage(Inn);
-        break;
-      case "Prison":
-        setBackgroundImage(Prison);
-        break;
-      default:
-        setBackgroundImage(Road);
-    }
+    const body = {
+      world: game.world,
+      production: choosenLocation.production,
+      variant: choosenLocation.variant,
+    };
+    console.error(body);
+    const response = await getNewStateGame(body);
+    setGame(response);
   }
 
   const [open, setOpen] = useState(false);
@@ -100,15 +50,15 @@ const Travel = props => {
         <DialogTitle>Choose where you want to travel</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {availableTravels.map(location => {
+            {travelProduction.map(location => {
               return (
                 <Button
-                  key={location.id}
+                  key={location.variant[2].WorldNodeId}
                   variant="contained"
                   style={{ margin: "5px" }}
                   onClick={() => onLocationChange(location)}
                 >
-                  {location.name}
+                  {location.variant[2].WorldNodeName}
                 </Button>
               );
             })}

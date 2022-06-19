@@ -53,5 +53,6 @@
   "devDependencies": {
     "@redux-devtools/core": "^3.12.0",
     "prettier": "2.6.2"
-  }
+  },
+  "proxy": "http://localhost:8000"
 }

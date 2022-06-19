@@ -134,13 +134,13 @@ img {
   margin-bottom: 1%;
 }
 
-.npcButtonExchange:target{
+.npcButtonExchange:target {
   width: 120%;
   height: 120%;
   display: block;
 }
 
-#npcButtonExchange:target{
+#npcButtonExchange:target {
   width: 120%;
   height: 120%;
   display: block;

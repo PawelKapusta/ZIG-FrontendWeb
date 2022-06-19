@@ -1,16 +1,22 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "../styles/HomeScreen.module.css";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import { OldWorldContext } from "../store/oldWorldContext";
+import { GameContext } from "../store/gameContexts";
+import { getStartStateGame } from "../api/client";
 
 const HomeScreen = () => {
   const navigate = useNavigate();
   const { readFileOnUpload } = useContext(OldWorldContext);
   const nickname = localStorage.getItem("Nickname");
+  let { setGame } = useContext(GameContext);
 
-  const onButtonClick = () => {
+  const onButtonClick = async () => {
+    const newGameState = await getStartStateGame();
+    setGame(newGameState);
+
     if (nickname !== undefined || nickname !== null || nickname !== "") {
       navigate("/main-game");
     } else {
