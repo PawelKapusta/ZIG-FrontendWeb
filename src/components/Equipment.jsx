@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
-import Box from "@mui/material/Box";
+import React from "react";
+// import React, { useContext } from "react";
+// import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+// import Typography from "@mui/material/Typography";
+// import Modal from "@mui/material/Modal";
 import styles from "../styles/MainGameScreen.module.css";
-import stylesEquipment from "../styles/Equipment.module.css";
+// import stylesEquipment from "../styles/Equipment.module.css";
 import HomeRepairServiceRoundedIcon from "@mui/icons-material/HomeRepairServiceRounded";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import { GameContext } from "../store/gameContexts";
-import deathImage from "../assets/death.jpg";
-import {useNavigate} from "react-router-dom";
+// import IconButton from "@mui/material/IconButton";
+// import CloseIcon from "@mui/icons-material/Close";
+// import Grid from "@mui/material/Grid";
+// import Paper from "@mui/material/Paper";
+// import { GameContext } from "../store/gameContexts";
+// import deathImage from "../assets/death.jpg";
+// import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -28,48 +29,48 @@ const style = {
 
 const Equipment = props => {
   const buttonStyle = props.buttonStyle;
-  const [open, setOpen] = React.useState(false);
-  const [deathOpen, setDeathOpen] = React.useState(false);
-  const navigate = useNavigate();
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  let { items, coins, setCoins, hp, setHp, resetDataGame} = useContext(GameContext);
+  // const [open, setOpen] = React.useState(false);
+  // const [deathOpen, setDeathOpen] = React.useState(false);
+  // const navigate = useNavigate();
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
+  // let { items, coins, setCoins, hp, setHp, resetDataGame } = useContext(GameContext);
 
-  const handleDeathClose = () => {
-    setDeathOpen(false);
-  };
-  const onMoveToMenu = () => {
-    resetDataGame();
-    navigate("/");
-  };
+  // const handleDeathClose = () => {
+  //   setDeathOpen(false);
+  // };
+  // const onMoveToMenu = () => {
+  //   resetDataGame();
+  //   navigate("/");
+  // };
 
-  function toUse(event, itemName) {
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].Name === itemName) {
-        if(items[i].Attributes.IsPoison === true){
-          setHp(0);
-          setDeathOpen(true);
-        }
-        if (items[i].Attributes.NutritionalValue > 0) {
-          setHp(hp + items[i].Attributes.NutritionalValue);
-        }
-        items.splice(i, 1);
-        break;
-      }
-    }
-    handleClose();
-  }
+  // function toUse(event, itemName) {
+  //   for (var i = 0; i < items.length; i++) {
+  //     if (items[i].Name === itemName) {
+  //       if (items[i].Attributes.IsPoison === true) {
+  //         setHp(0);
+  //         setDeathOpen(true);
+  //       }
+  //       if (items[i].Attributes.NutritionalValue > 0) {
+  //         setHp(hp + items[i].Attributes.NutritionalValue);
+  //       }
+  //       items.splice(i, 1);
+  //       break;
+  //     }
+  //   }
+  //   handleClose();
+  // }
 
-  function toSell(event, itemName) {
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].Name === itemName) {
-        setCoins(coins + items[i].Attributes.Value);
-        items.splice(i, 1);
-        break;
-      }
-    }
-    handleClose();
-  }
+  // function toSell(event, itemName) {
+  //   for (var i = 0; i < items.length; i++) {
+  //     if (items[i].Name === itemName) {
+  //       setCoins(coins + items[i].Attributes.Value);
+  //       items.splice(i, 1);
+  //       break;
+  //     }
+  //   }
+  //   handleClose();
+  // }
 
   return (
     <div>
@@ -77,11 +78,11 @@ const Equipment = props => {
         className={styles.buttonEquipment}
         style={buttonStyle}
         startIcon={<HomeRepairServiceRoundedIcon className={styles.buttonLogoEquipment} />}
-        onClick={handleOpen}
+        // onClick={handleOpen}
       >
         Equipment
       </Button>
-      <Modal
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -131,20 +132,20 @@ const Equipment = props => {
         </Box>
       </Modal>
       <Modal
-          hideBackdrop
-          open={deathOpen}
-          onClose={handleDeathClose}
-          aria-labelledby="child-modal-title"
-          aria-describedby="child-modal-description"
+        hideBackdrop
+        open={deathOpen}
+        onClose={handleDeathClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
       >
-        <Box sx={{...style}}>
+        <Box sx={{ ...style }}>
           <h2 id="child-modal-title">Death</h2>
-          <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero"/>
+          <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero" />
           <h5 id={styles.npcHeroDeathText}> You lost :( </h5>
           <Button
-              onClick={handleDeathClose}
-              id={styles.npcHeroButtonClose}
-              endIcon={<CloseIcon style={{color: "black"}}/>}
+            onClick={handleDeathClose}
+            id={styles.npcHeroButtonClose}
+            endIcon={<CloseIcon style={{ color: "black" }} />}
           />
           <div id={styles.npcHeroButtons}>
             <Button id={styles.npcButton} className={styles.npcButton} onClick={onMoveToMenu}>
@@ -152,7 +153,7 @@ const Equipment = props => {
             </Button>
           </div>
         </Box>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

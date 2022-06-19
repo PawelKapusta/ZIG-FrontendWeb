@@ -11,7 +11,6 @@ const Coins = ({ buttonStyle, money, isShowed }) => {
     } else {
       setCoin(true);
     }
-    console.log(coin);
   };
 
   return (
