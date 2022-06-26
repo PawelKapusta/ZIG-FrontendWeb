@@ -58,7 +58,7 @@ const MainGameScreen = () => {
 
       <Menu buttonStyle={buttonStyle} />
       <VerticalCenteredModal
-        buttonName="Start here"
+        buttonName="Quest info"
         modalInfo={modalInfo}
         modalHeader={modalHeader}
       />
