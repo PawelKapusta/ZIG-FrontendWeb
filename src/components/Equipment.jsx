@@ -12,8 +12,6 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import deathImage from "../assets/death.jpg";
-import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -29,51 +27,26 @@ const style = {
 
 const Equipment = props => {
   const buttonStyle = props.buttonStyle;
-  // let { game, setGame } = useContext(GameContext);
+  let { game, setGame } = useContext(GameContext);
 
   const [open, setOpen] = useState(false);
-  // const [deathOpen, setDeathOpen] = React.useState(false);
-  // const navigate = useNavigate();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  //let { items, coins, setCoins, hp, setHp, resetDataGame } = useContext(GameContext);
-  let { items, coins, hp } = useContext(GameContext);
-  console.log(items);
-  // const handleDeathClose = () => {
-  //   setDeathOpen(false);
-  // };
-  // const onMoveToMenu = () => {
-  //   resetDataGame();
-  //   navigate("/");
-  // };
+  let { items, coins, hp, droppingProductions } = useContext(GameContext);
 
-  // function toUse(event, itemName) {
-  //   for (var i = 0; i < items.length; i++) {
-  //     if (items[i].Name === itemName) {
-  //       if (items[i].Attributes.IsPoison === true) {
-  //         setHp(0);
-  //         setDeathOpen(true);
-  //       }
-  //       if (items[i].Attributes.NutritionalValue > 0) {
-  //         setHp(hp + items[i].Attributes.NutritionalValue);
-  //       }
-  //       items.splice(i, 1);
-  //       break;
-  //     }
-  //   }
-  //   handleClose();
-  // }
 
-  // function toSell(event, itemName) {
-  //   for (var i = 0; i < items.length; i++) {
-  //     if (items[i].Name === itemName) {
-  //       setCoins(coins + items[i].Attributes.Value);
-  //       items.splice(i, 1);
-  //       break;
-  //     }
-  //   }
-  //   handleClose();
-  // }
+  async function onDroppingItem(event, item) {
+
+    const body = {
+      world: game.world,
+      production: item.production,
+      variant: item.variant,
+    };
+    console.error(body);
+    const response = await getNewStateGame(body);
+    setGame(response);
+    handleClose();
+  }
 
   return (
     <div>
@@ -101,28 +74,28 @@ const Equipment = props => {
 
           <Grid container spacing={3}>
 
-            {items?.map(item => (
-                  <Grid item key={item.Name} xs={4} sm={4} md={4} lg={4}>
+            {droppingProductions?.map(item => (
+                  <Grid item key={item.variant[2].WorldNodeName} xs={4} sm={4} md={4} lg={4}>
                     <Paper>
                       {" "}
-                      {item.Name}
+                      {item.variant[2].WorldNodeName}
                       <img
                           className={stylesEquipment.itemPhoto}
-                          src={require("../assets/items/" + item.Name + ".png")}
+                          src={require("../assets/items/" + item.variant[2].WorldNodeName + ".png")}
                           alt=""
                       />
                     </Paper>
-                    <Paper>Value: {item.Attributes.Value}</Paper>
-                    {item.Attributes.NutritionalValue?.valueOf() > 0 ? <Paper>Nutrition: {item.Attributes.NutritionalValue?.valueOf()} </Paper>:null}
-                    {item.Attributes.IsPoison?.toString() == 'true'? <Paper>IsPoison</Paper>:null}
+                    {item.variant[2].WorldNodeAttr?.Value > 0 ?  <Paper>Value: {item?.variant[2].WorldNodeAttr.Value}</Paper>: null}
+                    {item.variant[2].WorldNodeAttr?.NutritionalValue?.valueOf() > 0 ? <Paper>Nutrition: {item.variant[2].WorldNodeAttr.NutritionalValue?.valueOf()} </Paper>:null}
+                    {item.variant[2].WorldNodeAttr?.IsPoison?.toString() == 'true'? <Paper>IsPoison</Paper>:null}
 
                     <Button
-                        // onClick={e => {
-                        //   toUse(e, item.Name);
-                        // }}
+                        onClick={e => {
+                          onDroppingItem(e, item);
+                        }}
                     >
                       {" "}
-                      Use
+                      Drop
                     </Button>
 
                   </Grid>

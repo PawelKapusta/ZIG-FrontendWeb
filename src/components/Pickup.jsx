@@ -59,16 +59,16 @@ const ModalPickup = props => {
               <Grid item key={item.variant[2].WorldNodeName} xs={4} sm={4} md={4} lg={4}>
                 <Paper>
                   {" "}
-                  {item.Name}
+                  {item.variant[2].WorldNodeName}
                   <img
                     className={stylesEquipment.itemPhoto}
                     src={require("../assets/items/" + item.variant[2].WorldNodeName + ".png")}
                     alt=""
                   />
                 </Paper>
-                <Paper>Value: {item.variant[2].WorldNodeAttr.Value}</Paper>
-                {item.variant[2].WorldNodeAttr.NutritionalValue?.valueOf() > 0 ? <Paper>Nutrition: {item.variant[2].WorldNodeAttr.NutritionalValue?.valueOf()} </Paper>:null}
-                {item.variant[2].WorldNodeAttr.IsPoison?.toString() == 'true'? <Paper>IsPoison</Paper>:null}
+                 {item.variant[2].WorldNodeAttr?.Value > 0 ?  <Paper>Value: {item?.variant[2].WorldNodeAttr.Value}</Paper>: null}
+                {item.variant[2].WorldNodeAttr?.NutritionalValue?.valueOf() > 0 ? <Paper>Nutrition: {item.variant[2].WorldNodeAttr.NutritionalValue?.valueOf()} </Paper>:null}
+                {item.variant[2].WorldNodeAttr?.IsPoison?.toString() == 'true'? <Paper>IsPoison</Paper>:null}
                 <Button
                   onClick={e => {
                     onAddItemToEquipment(e, item);
