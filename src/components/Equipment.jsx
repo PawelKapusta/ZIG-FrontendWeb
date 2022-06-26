@@ -1,19 +1,19 @@
-import React from "react";
-// import React, { useContext } from "react";
-// import Box from "@mui/material/Box";
+import React, { useContext, useState } from "react";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-// import Typography from "@mui/material/Typography";
-// import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import styles from "../styles/MainGameScreen.module.css";
-// import stylesEquipment from "../styles/Equipment.module.css";
+import stylesEquipment from "../styles/Equipment.module.css";
 import HomeRepairServiceRoundedIcon from "@mui/icons-material/HomeRepairServiceRounded";
-// import IconButton from "@mui/material/IconButton";
-// import CloseIcon from "@mui/icons-material/Close";
-// import Grid from "@mui/material/Grid";
-// import Paper from "@mui/material/Paper";
-// import { GameContext } from "../store/gameContexts";
-// import deathImage from "../assets/death.jpg";
-// import { useNavigate } from "react-router-dom";
+import { getNewStateGame } from "../api/client";
+import {GameContext} from "../store/gameContexts";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import deathImage from "../assets/death.jpg";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -29,13 +29,16 @@ const style = {
 
 const Equipment = props => {
   const buttonStyle = props.buttonStyle;
-  // const [open, setOpen] = React.useState(false);
+  // let { game, setGame } = useContext(GameContext);
+
+  const [open, setOpen] = useState(false);
   // const [deathOpen, setDeathOpen] = React.useState(false);
   // const navigate = useNavigate();
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-  // let { items, coins, setCoins, hp, setHp, resetDataGame } = useContext(GameContext);
-
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  //let { items, coins, setCoins, hp, setHp, resetDataGame } = useContext(GameContext);
+  let { items, coins, hp } = useContext(GameContext);
+  console.log(items);
   // const handleDeathClose = () => {
   //   setDeathOpen(false);
   // };
@@ -78,11 +81,11 @@ const Equipment = props => {
         className={styles.buttonEquipment}
         style={buttonStyle}
         startIcon={<HomeRepairServiceRoundedIcon className={styles.buttonLogoEquipment} />}
-        // onClick={handleOpen}
+         onClick={handleOpen}
       >
         Equipment
       </Button>
-      {/* <Modal
+      { <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -95,65 +98,64 @@ const Equipment = props => {
               <CloseIcon />
             </IconButton>
           </Typography>
+
           <Grid container spacing={3}>
-            {items.map(item => (
-              <Grid item key={item.Name} xs={4} sm={4} md={4} lg={4}>
-                <Paper>
-                  {" "}
-                  {item.Name}
-                  <img
-                    className={stylesEquipment.itemPhoto}
-                    src={require("../assets/items/" + item.Name + ".png")}
-                    alt=""
-                  />
-                </Paper>
-                <Paper>Value: {item.Attributes.Value}</Paper>
-                <Paper>Nutrition: {item.Attributes.NutritionalValue.valueOf()}</Paper>
-                <Paper>IsPoison: {item.Attributes.IsPoison.toString()}</Paper>
-                <Button
-                  onClick={e => {
-                    toUse(e, item.Name);
-                  }}
-                >
-                  {" "}
-                  Use
-                </Button>
-                <Button
-                  onClick={e => {
-                    toSell(e, item.Name);
-                  }}
-                >
-                  {" "}
-                  Sell
-                </Button>
-              </Grid>
-            ))}
+
+            {items?.map(item => (
+                  <Grid item key={item.Name} xs={4} sm={4} md={4} lg={4}>
+                    <Paper>
+                      {" "}
+                      {item.Name}
+                      <img
+                          className={stylesEquipment.itemPhoto}
+                          src={require("../assets/items/" + item.Name + ".png")}
+                          alt=""
+                      />
+                    </Paper>
+                    <Paper>Value: {item.Attributes.Value}</Paper>
+                    {item.Attributes.NutritionalValue?.valueOf() > 0 ? <Paper>Nutrition: {item.Attributes.NutritionalValue?.valueOf()} </Paper>:null}
+                    {item.Attributes.IsPoison?.toString() == 'true'? <Paper>IsPoison</Paper>:null}
+
+                    <Button
+                        // onClick={e => {
+                        //   toUse(e, item.Name);
+                        // }}
+                    >
+                      {" "}
+                      Use
+                    </Button>
+
+                  </Grid>
+              ))}
           </Grid>
+
+
+
         </Box>
-      </Modal>
-      <Modal
-        hideBackdrop
-        open={deathOpen}
-        onClose={handleDeathClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style }}>
-          <h2 id="child-modal-title">Death</h2>
-          <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero" />
-          <h5 id={styles.npcHeroDeathText}> You lost :( </h5>
-          <Button
-            onClick={handleDeathClose}
-            id={styles.npcHeroButtonClose}
-            endIcon={<CloseIcon style={{ color: "black" }} />}
-          />
-          <div id={styles.npcHeroButtons}>
-            <Button id={styles.npcButton} className={styles.npcButton} onClick={onMoveToMenu}>
-              Go to Menu
-            </Button>
-          </div>
-        </Box>
-      </Modal> */}
+      </Modal>}
+      {/*<Modal*/}
+      {/*  hideBackdrop*/}
+      {/*  open={deathOpen}*/}
+      {/*  onClose={handleDeathClose}*/}
+      {/*  aria-labelledby="child-modal-title"*/}
+      {/*  aria-describedby="child-modal-description"*/}
+      {/*>*/}
+      {/*  <Box sx={{ ...style }}>*/}
+      {/*    <h2 id="child-modal-title">Death</h2>*/}
+      {/*    <img id={styles.npcHeroDeath} src={deathImage} alt="NpcHero" />*/}
+      {/*    <h5 id={styles.npcHeroDeathText}> You lost :( </h5>*/}
+      {/*    <Button*/}
+      {/*      onClick={handleDeathClose}*/}
+      {/*      id={styles.npcHeroButtonClose}*/}
+      {/*      endIcon={<CloseIcon style={{ color: "black" }} />}*/}
+      {/*    />*/}
+      {/*    <div id={styles.npcHeroButtons}>*/}
+      {/*      <Button id={styles.npcButton} className={styles.npcButton} onClick={onMoveToMenu}>*/}
+      {/*        Go to Menu*/}
+      {/*      </Button>*/}
+      {/*    </div>*/}
+      {/*  </Box>*/}
+      {/*</Modal> }*/}
     </div>
   );
 };
