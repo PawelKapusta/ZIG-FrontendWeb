@@ -20,6 +20,7 @@ export const GameContextProvider = ({ children }) => {
   const [backgroundImage, setBackgroundImage] = useState(imageUrl);
   const [items, setItems] = useState();
   const [pickingProductions, setPickingProductions] = useState();
+  const [droppingProductions, setDroppingProductions] = useState();
   const [exchanging, setExchanging] = useState(null);
   const [exchanged, setExchanged] = useState(null);
   const [npcLives, setNpcLives] = useState({});
@@ -71,6 +72,7 @@ export const GameContextProvider = ({ children }) => {
     setTeleportProduction(getTeleportationProductions(productions));
     setTravelProduction(getTravelProductions(productions));
     setPickingProductions(getPickingProductions(productions));
+    setDroppingProductions(getDroppingProductions(productions));
   }, [game]);
 
   const resetDataGame = () => {
@@ -81,6 +83,7 @@ export const GameContextProvider = ({ children }) => {
     setBackgroundImage(imageUrl);
     setItems();
     setPickingProductions();
+    setDroppingProductions();
     setExchanged(null);
     setExchanging(null);
     setNpcLives({
@@ -118,7 +121,9 @@ export const GameContextProvider = ({ children }) => {
     travelProduction,
     setTravelProduction,
     pickingProductions,
-    setPickingProductions
+    setPickingProductions,
+    droppingProductions,
+    setDroppingProductions
   };
 
   return <GameContext.Provider value={providerValue}>{children}</GameContext.Provider>;
@@ -175,3 +180,15 @@ function getPickingProductions(productions) {
   return [];
 }
 
+function getDroppingProductions(productions){
+  const dropId = productions?.findIndex(production =>
+      production.prod.Title.includes("Dropping item"),
+  );
+  if (dropId !== -1 && dropId !== undefined) {
+    const drop = productions[dropId].variants.map(v => {
+      return { production: productions[dropId].prod, variant: v };
+    });
+    return drop;
+  }
+  return [];
+}
