@@ -19,6 +19,7 @@ export const GameContextProvider = ({ children }) => {
   const [currentLocation, setCurrentLocation] = useState();
   const [backgroundImage, setBackgroundImage] = useState(imageUrl);
   const [items, setItems] = useState();
+  const [pickingProductions, setPickingProductions] = useState();
   const [exchanging, setExchanging] = useState(null);
   const [exchanged, setExchanged] = useState(null);
   const [npcLives, setNpcLives] = useState({});
@@ -69,6 +70,7 @@ export const GameContextProvider = ({ children }) => {
 
     setTeleportProduction(getTeleportationProductions(productions));
     setTravelProduction(getTravelProductions(productions));
+    setPickingProductions(getPickingProductions(productions));
   }, [game]);
 
   const resetDataGame = () => {
@@ -78,6 +80,7 @@ export const GameContextProvider = ({ children }) => {
     setCurrentLocation();
     setBackgroundImage(imageUrl);
     setItems();
+    setPickingProductions();
     setExchanged(null);
     setExchanging(null);
     setNpcLives({
@@ -114,6 +117,8 @@ export const GameContextProvider = ({ children }) => {
     setTeleportProduction,
     travelProduction,
     setTravelProduction,
+    pickingProductions,
+    setPickingProductions
   };
 
   return <GameContext.Provider value={providerValue}>{children}</GameContext.Provider>;
@@ -156,3 +161,17 @@ function getTravelProductions(productions) {
   }
   return [];
 }
+
+function getPickingProductions(productions) {
+  const pickId = productions?.findIndex(production =>
+      production.prod.Title.includes("Picking item up"),
+  );
+  if (pickId !== -1 && pickId !== undefined) {
+    const pick = productions[pickId].variants.map(v => {
+      return { production: productions[pickId].prod, variant: v };
+    });
+    return pick;
+  }
+  return [];
+}
+
